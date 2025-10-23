@@ -55,7 +55,7 @@ local function smart_buffer_close()
         end
       end
     else
-      vim.cmd("enew")
+      vim.cmd("quit")
     end
   end
 
