@@ -36,6 +36,14 @@ alias lg='lazygit'
 alias ze='zellij'
 alias c='clear'
 
+# Enhanced Navigation
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ~='cd ~'
+alias cdp='cd -'
+
 # Git aliases
 alias gs='git status'
 alias ga='git add'
