@@ -189,6 +189,7 @@ alias find='fd'
 alias grep='rg'
 alias top='btop'
 alias vim='nvim'
+alias y='yazi'
 
 # Basic navigation
 alias ..='cd ..'
