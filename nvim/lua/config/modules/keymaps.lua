@@ -95,12 +95,25 @@ function M.setup_general_keymaps()
   -- Diagnostic window navigation
   set_keymap("n", "<C-W>d", vim.diagnostic.open_float, "Show diagnostics under the cursor")
   set_keymap("n", "<C-W><C-D>", vim.diagnostic.open_float, "Show diagnostics under the cursor")
+  set_keymap("n", "gl", vim.diagnostic.open_float, "Show line diagnostics")
 
   -- File operations
   set_keymap("n", "<leader>w", ":w<CR>", "Save")
   set_keymap("n", "<leader>W", ":wa<CR>", "Save all")
   set_keymap("n", "<leader>Q", ":qa<CR>", "Quit all")
   set_keymap("n", "<leader>q", smart_buffer_close, "Close current buffer")
+
+  -- Quick double-tap commands
+  set_keymap("n", "WW", ":wa<CR>", "Quick: Save all")
+  set_keymap("n", "QQ", ":qa<CR>", "Quick: Quit all")
+
+  -- Vim-style quick save/quit
+  set_keymap("n", "ZZ", function()
+    vim.cmd("w")
+    smart_buffer_close()
+  end, "Save and close buffer (vim-style)")
+  set_keymap("n", "ZQ", ":q!<CR>", "Quit without saving (vim-style)")
+
   set_keymap("n", "<leader>x", function()
     vim.cmd("w")
     smart_buffer_close()
@@ -116,6 +129,9 @@ function M.setup_general_keymaps()
     vim.opt.wrap = not vim.opt.wrap:get()
   end, "Toggle word wrap")
   set_keymap("n", "<leader>hl", ":nohlsearch<CR>", "Clear search highlights")
+
+  -- Quick clear search highlights
+  set_keymap("n", "<Esc><Esc>", ":nohlsearch<CR>", "Clear search highlights")
 end
 
 -- Better movement (Lines 92-146)
@@ -130,10 +146,25 @@ function M.setup_navigation_keymaps()
   set_keymap("n", "<leader>cn", ":cnext<CR>", "Next quickfix item")
   set_keymap("n", "<leader>cp", ":cprev<CR>", "Previous quickfix item")
 
+  -- Bracket-style navigation
+  set_keymap("n", "[q", ":cprev<CR>", "Previous quickfix item")
+  set_keymap("n", "]q", ":cnext<CR>", "Next quickfix item")
+  set_keymap("n", "[b", ":bprevious<CR>", "Previous buffer")
+  set_keymap("n", "]b", ":bnext<CR>", "Next buffer")
+  set_keymap("n", "[t", ":tabprevious<CR>", "Previous tab")
+  set_keymap("n", "]t", ":tabnext<CR>", "Next tab")
+
   -- Splits
   set_keymap("n", "<leader>sv", ":vsplit<CR>", "Split window vertically")
   set_keymap("n", "<leader>sh", ":split<CR>", "Split window horizontally")
   set_keymap("n", "<leader>sc", ":close<CR>", "Close current window/split")
+
+  -- Window management
+  set_keymap("n", "<C-q>", ":close<CR>", "Quick close window")
+  set_keymap("n", "<leader>sm", function()
+    vim.cmd("wincmd |")
+    vim.cmd("wincmd _")
+  end, "Maximize/zoom current window")
 
   -- Jump list
   set_keymap("n", "<leader>zo", "<C-o>", "Jump back")
@@ -219,6 +250,10 @@ function M.setup_terminal_keymaps()
     set_keymap("n", "<leader>Ts", ":ToggleTerm size=15 direction=horizontal<CR>", "Horizontal terminal")
     set_keymap("n", "<leader>Tv", ":ToggleTerm size=80 direction=vertical<CR>", "Vertical terminal")
     set_keymap("n", "<leader>Tl", ":ToggleTermSendCurrentLine<CR>", "Send current line to terminal")
+
+    -- Quick terminal shortcuts
+    set_keymap("n", "<leader>tt", ":ToggleTerm direction=float<CR>", "Quick toggle terminal")
+    set_keymap("n", "<C-/>", ":ToggleTerm direction=float<CR>", "Quick toggle terminal")
   end
 end
 
@@ -292,6 +327,12 @@ function M.setup_plugin_keymaps()
     set_keymap("n", "<leader>fs", ":Telescope lsp_document_symbols<CR>", "Find symbols in file")
     set_keymap("n", "<leader>fc", ":Telescope commands<CR>", "Find commands")
     set_keymap("n", "<leader>fk", ":Telescope keymaps<CR>", "Find keymaps")
+
+    -- Power user shortcuts
+    set_keymap("n", "<leader>fp", ":Telescope git_files<CR>", "Find git files")
+    set_keymap("n", "<leader>ft", ":Telescope resume<CR>", "Resume last picker")
+    set_keymap("n", "<leader>fw", ":Telescope grep_string<CR>", "Find word under cursor")
+    set_keymap("v", "<leader>fw", "\"zy:Telescope grep_string default_text=<C-r>z<CR>", "Find selection")
   end
 
   -- CalmHive knowledge base
@@ -456,6 +497,14 @@ function M.setup_plugin_keymaps()
     set_keymap("n", "<leader>gs", ":Gitsigns stage_hunk<CR>", "Stage git hunk")
     set_keymap("n", "<leader>gu", ":Gitsigns undo_stage_hunk<CR>", "Undo stage git hunk")
   end
+
+  -- Git workflow shortcuts
+  local lazygit_ok = pcall(require, "lazygit")
+  if lazygit_ok then
+    set_keymap("n", "<leader>gg", ":LazyGit<CR>", "Open LazyGit")
+  end
+  set_keymap("n", "<leader>gd", ":Gitsigns diffthis<CR>", "Git diff current file")
+  set_keymap("n", "<leader>gD", ":Gitsigns diffthis ~<CR>", "Git diff staged changes")
 
   -- Fugitive (if available)
   local fugitive_ok = pcall(function()
