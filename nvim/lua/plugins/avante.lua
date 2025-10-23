@@ -17,6 +17,14 @@ return {
         },
       },
     },
+    file_selector = {
+      -- Exclude special buffers and UI windows that aren't real files
+      provider = "native",
+      filters = {
+        "kulala://.*",  -- Kulala UI buffers
+        ".*://.*",      -- Any other special protocol buffers
+      },
+    },
   },
   build = "make",
   dependencies = {
