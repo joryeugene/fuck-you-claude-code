@@ -19,6 +19,7 @@ return {
         markdown = { "prettier" },
         lua = { "stylua" },
         python = { "black" },
+        http = {}, -- Disable formatting for .http files (kulala REST client)
       },
     })
 
