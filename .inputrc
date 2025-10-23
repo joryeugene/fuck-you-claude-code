@@ -36,3 +36,44 @@ set convert-meta off
 # commands (basically more intelligent Up/Down behavior)
 "\e[A": history-search-backward
 "\e[B": history-search-forward
+
+# ===== IMPROVEMENTS =====
+
+# Color files by type (like ls --color)
+set colored-stats on
+
+# Color the completion prefix (what you've typed) differently
+set colored-completion-prefix on
+
+# Show mode indicator (INS/CMD for vi mode)
+set show-mode-in-prompt on
+
+# Append "/" to directory completions automatically
+set mark-directories on
+
+# Match hidden files without needing to type the dot
+set match-hidden-files on
+
+# Display completions horizontally sorted (easier to scan)
+set print-completions-horizontally off
+
+# Enable bell only for ambiguous completions
+set bell-style visible
+
+# Faster completion - don't wait for ambiguous completions
+set show-all-if-unmodified on
+
+# Vi mode specific bindings
+$if mode=vi
+  # Use jk/kj to escape insert mode (like Vim)
+  set keymap vi-insert
+  "jk": vi-movement-mode
+  "kj": vi-movement-mode
+
+  # Ctrl-l to clear screen in insert mode
+  "\C-l": clear-screen
+
+  # Ctrl-a/e for home/end even in vi mode (muscle memory)
+  "\C-a": beginning-of-line
+  "\C-e": end-of-line
+$endif
