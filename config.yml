@@ -1,0 +1,36 @@
+gui:
+  showIcons: true
+  scrollHeight: 2
+  expandFocusedSidePanel: true
+  mainPanelSplitMode: "flexible"
+  mouseEvents: true
+  showFileTree: true
+  showCommandLog: true
+  theme:
+    lightTheme: false
+    activeBorderColor:
+      - "#98be65" # green
+      - "bold"
+    inactiveBorderColor:
+      - "#c792ea" # purple
+    optionsTextColor:
+      - "#51afef" # blue
+    selectedLineBgColor:
+      - "#2257a0" # blue background
+
+git:
+  paging:
+    colorArg: always
+    pager: delta --dark --paging=never
+
+os:
+  editPreset: "nvim"
+  copyToClipboard: true
+
+disableStartupPopups: true
+
+customCommands:
+  - key: "O"
+    command: "gh repo view --web"
+    context: "global"
+    description: "Open repo in browser"
