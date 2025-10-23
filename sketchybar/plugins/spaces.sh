@@ -1,12 +1,9 @@
 #!/bin/bash
 
+source "$HOME/.config/sketchybar/colors.sh"
+
 # Yabai space indicator with window count
 # This script highlights the currently focused space and shows window count
-
-# Colors (matching the aerospace theme)
-BLUE=0xff89b4fa
-GRAY=0xff6c7086
-DIM=0xff45475a
 
 # Get the space ID from the argument
 SPACE_ID=$1
@@ -29,19 +26,19 @@ if [ "$SPACE_ID" = "$FOCUSED_SPACE" ]; then
     sketchybar --set $NAME \
         background.color=$BLUE \
         label="$LABEL" \
-        label.color=0xff1e1e2e
+        label.color=$BACKGROUND
 else
     if [ "$WINDOW_COUNT" -gt 0 ]; then
         # Non-focused with windows
         sketchybar --set $NAME \
             background.color=$GRAY \
             label="$LABEL" \
-            label.color=0xffcdd6f4
+            label.color=$FOREGROUND
     else
         # Empty space
         sketchybar --set $NAME \
             background.color=$DIM \
             label="$LABEL" \
-            label.color=0xff6c7086
+            label.color=$GRAY
     fi
 fi

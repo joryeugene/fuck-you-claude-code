@@ -1,5 +1,7 @@
 #!/bin/bash
 
-# Date and time display
+source "$HOME/.config/sketchybar/colors.sh"
 
-sketchybar --set $NAME label="$(date '+%a %d %b %H:%M')"
+# Date and time display
+sketchybar --set $NAME label="$(date '+%a %d %b %H:%M')" \
+                       label.color=$FOREGROUND

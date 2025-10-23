@@ -1,65 +1,61 @@
 #!/bin/bash
 
-# Sketchybar configuration for Aerospace integration
+# SketchyBar Configuration - Modular Setup
+# Colors and styles are defined in colors.sh
+# Widget definitions are in items/
+# Widget logic is in plugins/
 
-# Color palette
-BACKGROUND=0xff1e1e2e
-FOREGROUND=0xffcdd6f4
-BLUE=0xff89b4fa
-GREEN=0xffa6e3a1
-YELLOW=0xfff9e2af
-RED=0xfff38ba8
-GRAY=0xff6c7086
+# Source color configuration
+source "$HOME/.config/sketchybar/colors.sh"
 
 # Bar appearance
-sketchybar --bar position=top height=32 blur_radius=0 color=$BACKGROUND
+sketchybar --bar position=top \
+                 height=32 \
+                 blur_radius=0 \
+                 color=$BACKGROUND
 
 # Default item settings
 sketchybar --default updates=when_shown \
-                     icon.font="Hack Nerd Font:Bold:14.0" \
+                     icon.font="$ICON_FONT" \
                      icon.color=$FOREGROUND \
-                     label.font="Hack Nerd Font:Bold:12.0" \
+                     label.font="$LABEL_FONT" \
                      label.color=$FOREGROUND \
-                     padding_left=5 \
-                     padding_right=5 \
+                     padding_left=10 \
+                     padding_right=10 \
                      background.corner_radius=5
 
-# Left side - Yabai spaces
-sketchybar --add event space_change
+##### Left Side Items #####
 
-# Create space items for spaces 1-6
-for sid in {1..6}; do
-    sketchybar --add item space.$sid left \
-        --subscribe space.$sid space_change \
-        --set space.$sid \
-        background.color=$GRAY \
-        background.corner_radius=5 \
-        background.height=20 \
-        background.drawing=on \
-        label="$sid" \
-        click_script="yabai -m space --focus $sid" \
-        script="$HOME/.config/sketchybar/plugins/yabai_spaces.sh $sid"
-done
+# Yabai workspace indicators
+source "$HOME/.config/sketchybar/items/spaces.sh"
 
-# Right side items
-# Battery
-sketchybar --add item battery right \
-           --set battery update_freq=120 \
-                        icon= \
-                        script="$HOME/.config/sketchybar/plugins/battery.sh"
+##### Right Side Items #####
+# Order: Clock | Battery/Volume | WiFi | CPU/Memory
 
-# Volume
-sketchybar --add item volume right \
-           --set volume script="$HOME/.config/sketchybar/plugins/volume.sh" \
-                       icon=󰕾
+# Time (always visible, most referenced)
+source "$HOME/.config/sketchybar/items/clock.sh"
 
-# Date and time
-sketchybar --add item clock right \
-           --set clock update_freq=10 \
-                      icon= \
-                      script="$HOME/.config/sketchybar/plugins/clock.sh"
+# Separator
+bash "$HOME/.config/sketchybar/items/separator.sh" "sep1"
 
-# Finalize
+# System status
+source "$HOME/.config/sketchybar/items/battery.sh"
+source "$HOME/.config/sketchybar/items/volume.sh"
+
+# Separator
+bash "$HOME/.config/sketchybar/items/separator.sh" "sep2"
+
+# Network
+source "$HOME/.config/sketchybar/items/wifi.sh"
+
+# Separator
+bash "$HOME/.config/sketchybar/items/separator.sh" "sep3"
+
+# System monitoring
+source "$HOME/.config/sketchybar/items/cpu.sh"
+source "$HOME/.config/sketchybar/items/memory.sh"
+
+# Finalize and update
 sketchybar --update
 
-echo "sketchybar configuration loaded.."
+echo "SketchyBar configuration loaded successfully!"
