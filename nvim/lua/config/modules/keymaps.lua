@@ -125,10 +125,10 @@ set_keymap("n", "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Move up (including w
 -- Setup navigation keymaps (Lines 148-195)
 function M.setup_navigation_keymaps()
   -- Quickfix list
-  set_keymap("n", "<leader>qfo", ":copen<CR>", "Open quickfix list")
-  set_keymap("n", "<leader>qfc", ":cclose<CR>", "Close quickfix list")
-  set_keymap("n", "<leader>qfn", ":cnext<CR>", "Next quickfix item")
-  set_keymap("n", "<leader>qfp", ":cprev<CR>", "Previous quickfix item")
+  set_keymap("n", "<leader>co", ":copen<CR>", "Open quickfix list")
+  set_keymap("n", "<leader>cc", ":cclose<CR>", "Close quickfix list")
+  set_keymap("n", "<leader>cn", ":cnext<CR>", "Next quickfix item")
+  set_keymap("n", "<leader>cp", ":cprev<CR>", "Previous quickfix item")
 
   -- Splits
   set_keymap("n", "<leader>sv", ":vsplit<CR>", "Split window vertically")

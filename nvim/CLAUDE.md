@@ -16,6 +16,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 1. **No capital letter namespaces** - Use lowercase only (e.g., `<leader>p*` not `<leader>P*`)
 2. **No single-letter conflicts** - If `<leader>x` exists as single mapping, cannot use `<leader>x*` as namespace
 3. **Current namespace allocation:**
+   - `<leader>c*` = Compile/quickfix list
    - `<leader>f*` = Find/Telescope
    - `<leader>l*` = sqL/Database (dadbod)
    - `<leader>p*` = Postman/HTTP REST (kulala)
