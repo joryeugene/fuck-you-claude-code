@@ -68,7 +68,7 @@ alt - w : open -a "WezTerm"
 
 # === ADDITIONAL SHORTCUTS ===
 # Screenshot (interactive selection)
-alt - o : screencapture -i
+alt - o : /usr/sbin/screencapture -i -U ~/Desktop/screenshot-$(date +%Y%m%d-%H%M%S).png
 
 # List all windows in current space
 alt - x : osascript -e 'tell application "Terminal" to do script "yabai -m query --windows --space | jq -r '"'"'.[] | \"\\(.app) - \\(.title)\"'"'"' && read -p \"Press Enter to close...\""'
