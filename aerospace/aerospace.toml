@@ -1,0 +1,104 @@
+# Modernized Aerospace Configuration
+# https://github.com/nikitabobko/aerospace
+
+[global]
+# UI settings
+show_popup = true
+enable_borders = true
+use_builtin_borders = false
+# Gap between windows for better visual separation
+window_gaps = true
+window_gap_size = 5
+# Smart gaps - no gaps when only one window
+smart_window_gaps = true
+# Minimum window dimensions
+min_window_width = 50
+min_window_height = 50
+
+# Main mode configuration
+[mode.main]
+key_config = [
+  # Launch applications
+  { mods = ["control"], key = "return", action = "exec", payload = "wezterm" },
+  { mods = ["alt", "shift"], key = "return", action = "exec", payload = "open -a Finder" },
+  { mods = ["alt", "shift"], key = "b", action = "exec", payload = "open -a 'Arc'" },
+  
+  # Window focus - vim style
+  { mods = ["alt"], key = "h", action = "focus_left" },
+  { mods = ["alt"], key = "j", action = "focus_down" },
+  { mods = ["alt"], key = "k", action = "focus_up" },
+  { mods = ["alt"], key = "l", action = "focus_right" },
+
+  # Window movement
+  { mods = ["alt", "shift"], key = "h", action = "swap_left" },
+  { mods = ["alt", "shift"], key = "j", action = "swap_down" },
+  { mods = ["alt", "shift"], key = "k", action = "swap_up" },
+  { mods = ["alt", "shift"], key = "l", action = "swap_right" },
+
+  # Resize windows - smoother increments
+  { mods = ["alt", "control"], key = "h", action = "resize_left", payload = "5" },
+  { mods = ["alt", "control"], key = "j", action = "resize_down", payload = "5" },
+  { mods = ["alt", "control"], key = "k", action = "resize_up", payload = "5" },
+  { mods = ["alt", "control"], key = "l", action = "resize_right", payload = "5" },
+
+  # Window operations
+  { mods = ["alt"], key = "w", action = "close_window" },
+  { mods = ["alt"], key = "f", action = "toggle_fullscreen" },
+  { mods = ["alt", "shift"], key = "space", action = "toggle_float" },
+  { mods = ["alt"], key = "c", action = "center_window" },
+  
+  # Layout switching
+  { mods = ["alt", "shift"], key = "t", action = "layout", payload = "tile" },
+  { mods = ["alt", "shift"], key = "m", action = "layout", payload = "monocle" },
+  { mods = ["alt", "shift"], key = "s", action = "layout", payload = "stack" },
+
+  # Workspace switching
+  { mods = ["alt"], key = "1", action = "workspace", payload = "1" },
+  { mods = ["alt"], key = "2", action = "workspace", payload = "2" },
+  { mods = ["alt"], key = "3", action = "workspace", payload = "3" },
+  { mods = ["alt"], key = "4", action = "workspace", payload = "4" },
+  { mods = ["alt"], key = "5", action = "workspace", payload = "5" },
+  { mods = ["alt"], key = "6", action = "workspace", payload = "6" },
+
+  # Move window to workspace
+  { mods = ["alt", "shift"], key = "1", action = "move_window_to_workspace", payload = "1" },
+  { mods = ["alt", "shift"], key = "2", action = "move_window_to_workspace", payload = "2" },
+  { mods = ["alt", "shift"], key = "3", action = "move_window_to_workspace", payload = "3" },
+  { mods = ["alt", "shift"], key = "4", action = "move_window_to_workspace", payload = "4" },
+  { mods = ["alt", "shift"], key = "5", action = "move_window_to_workspace", payload = "5" },
+  { mods = ["alt", "shift"], key = "6", action = "move_window_to_workspace", payload = "6" },
+
+  # Cycle through workspaces
+  { mods = ["alt"], key = "tab", action = "cycle_workspace", payload = "next" },
+  { mods = ["alt", "shift"], key = "tab", action = "cycle_workspace", payload = "prev" },
+  
+  # Quick reload configuration
+  { mods = ["alt", "shift"], key = "r", action = "reload_config" },
+]
+
+# Workspace configurations
+[workspaces]
+1 = { layout = "tile", name = "Main" }
+2 = { layout = "tile", name = "Dev" }
+3 = { layout = "monocle", name = "Web" }
+4 = { layout = "monocle", name = "Media" }
+5 = { layout = "tile", name = "Social" }
+6 = { layout = "stack", name = "Misc" }
+
+# Layout configurations
+[layout.tile]
+main_ratio = 0.55
+main_location = "left"
+
+[layout.monocle]
+show_single_window = true
+
+[layout.stack]
+show_single_window = true
+
+# Application-specific rules
+[window_rules]
+"com.apple.finder" = { float = true }
+"com.apple.systempreferences" = { float = true }
+"com.apple.Calculator" = { float = true }
+"com.apple.Safari" = { workspace = "3" }
