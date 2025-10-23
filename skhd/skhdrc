@@ -8,6 +8,10 @@ alt - j : yabai -m window --focus south
 alt - k : yabai -m window --focus north
 alt - l : yabai -m window --focus east
 
+# Stack navigation (for stack layout mode)
+alt - n : yabai -m window --focus stack.next
+alt - p : yabai -m window --focus stack.prev
+
 # === WINDOW MOVEMENT ===
 shift + alt - h : yabai -m window --swap west
 shift + alt - j : yabai -m window --swap south
