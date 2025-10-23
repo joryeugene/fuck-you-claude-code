@@ -1,0 +1,76 @@
+# Skhd configuration
+# Keyboard shortcuts for yabai window manager
+# Ported from aerospace configuration
+
+# === WINDOW NAVIGATION (vim-style) ===
+alt - h : yabai -m window --focus west
+alt - j : yabai -m window --focus south
+alt - k : yabai -m window --focus north
+alt - l : yabai -m window --focus east
+
+# === WINDOW MOVEMENT ===
+shift + alt - h : yabai -m window --swap west
+shift + alt - j : yabai -m window --swap south
+shift + alt - k : yabai -m window --swap north
+shift + alt - l : yabai -m window --swap east
+
+# === WINDOW RESIZING ===
+ctrl + alt - h : yabai -m window --resize left:-50:0 || yabai -m window --resize right:-50:0
+ctrl + alt - j : yabai -m window --resize bottom:0:50 || yabai -m window --resize top:0:50
+ctrl + alt - k : yabai -m window --resize top:0:-50 || yabai -m window --resize bottom:0:-50
+ctrl + alt - l : yabai -m window --resize right:50:0 || yabai -m window --resize left:50:0
+
+# === WINDOW OPERATIONS ===
+# Fullscreen toggle
+alt - f : yabai -m window --toggle zoom-fullscreen
+
+# Toggle float
+shift + alt - space : yabai -m window --toggle float
+
+# Balance window sizes
+alt - 0x1D : yabai -m space --balance
+
+# Rotate layout 90 degrees (reset layout equivalent)
+alt - r : yabai -m space --rotate 90
+
+# === LAYOUT SWITCHING ===
+# Toggle between bsp and float layout
+alt - 0x2C : yabai -m space --layout bsp
+
+# === SPACE SWITCHING ===
+alt - 1 : yabai -m space --focus 1
+alt - 2 : yabai -m space --focus 2
+alt - 3 : yabai -m space --focus 3
+alt - 4 : yabai -m space --focus 4
+alt - 5 : yabai -m space --focus 5
+alt - 6 : yabai -m space --focus 6
+
+# === MOVE WINDOW TO SPACE (with focus) ===
+shift + alt - 1 : yabai -m window --space 1 && yabai -m space --focus 1
+shift + alt - 2 : yabai -m window --space 2 && yabai -m space --focus 2
+shift + alt - 3 : yabai -m window --space 3 && yabai -m space --focus 3
+shift + alt - 4 : yabai -m window --space 4 && yabai -m space --focus 4
+shift + alt - 5 : yabai -m window --space 5 && yabai -m space --focus 5
+shift + alt - 6 : yabai -m window --space 6 && yabai -m space --focus 6
+
+# === SPACE NAVIGATION HELPERS ===
+# Toggle between current and previous space (like Alt+Tab for spaces)
+alt - tab : yabai -m space --focus recent
+
+# === APP LAUNCH SHORTCUTS ===
+alt - a : open -a "Asana"
+alt - e : open -a "Zen Browser"
+alt - w : open -a "WezTerm"
+
+# === ADDITIONAL SHORTCUTS ===
+# Screenshot (interactive selection)
+alt - o : screencapture -i
+
+# List all windows in current space
+alt - x : osascript -e 'tell application "Terminal" to do script "yabai -m query --windows --space | jq -r '"'"'.[] | \"\\(.app) - \\(.title)\"'"'"' && read -p \"Press Enter to close...\""'
+
+# Layout toggle (accordion mode equivalent - stack layout)
+alt - 0x2B : yabai -m space --layout stack
+
+# === CONFIGURATION ===
+shift + alt - r : yabai --restart-service && skhd --restart-service
