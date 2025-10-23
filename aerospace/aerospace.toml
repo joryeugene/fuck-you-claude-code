@@ -1,104 +1,140 @@
 # Modernized Aerospace Configuration
 # https://github.com/nikitabobko/aerospace
 
-[global]
-# UI settings
-show_popup = true
-enable_borders = true
-use_builtin_borders = false
-# Gap between windows for better visual separation
-window_gaps = true
-window_gap_size = 5
-# Smart gaps - no gaps when only one window
-smart_window_gaps = true
-# Minimum window dimensions
-min_window_width = 50
-min_window_height = 50
-
-# Main mode configuration
-[mode.main]
-key_config = [
-  # Launch applications
-  { mods = ["control"], key = "return", action = "exec", payload = "wezterm" },
-  { mods = ["alt", "shift"], key = "return", action = "exec", payload = "open -a Finder" },
-  { mods = ["alt", "shift"], key = "b", action = "exec", payload = "open -a 'Arc'" },
-  
-  # Window focus - vim style
-  { mods = ["alt"], key = "h", action = "focus_left" },
-  { mods = ["alt"], key = "j", action = "focus_down" },
-  { mods = ["alt"], key = "k", action = "focus_up" },
-  { mods = ["alt"], key = "l", action = "focus_right" },
-
-  # Window movement
-  { mods = ["alt", "shift"], key = "h", action = "swap_left" },
-  { mods = ["alt", "shift"], key = "j", action = "swap_down" },
-  { mods = ["alt", "shift"], key = "k", action = "swap_up" },
-  { mods = ["alt", "shift"], key = "l", action = "swap_right" },
-
-  # Resize windows - smoother increments
-  { mods = ["alt", "control"], key = "h", action = "resize_left", payload = "5" },
-  { mods = ["alt", "control"], key = "j", action = "resize_down", payload = "5" },
-  { mods = ["alt", "control"], key = "k", action = "resize_up", payload = "5" },
-  { mods = ["alt", "control"], key = "l", action = "resize_right", payload = "5" },
-
-  # Window operations
-  { mods = ["alt"], key = "w", action = "close_window" },
-  { mods = ["alt"], key = "f", action = "toggle_fullscreen" },
-  { mods = ["alt", "shift"], key = "space", action = "toggle_float" },
-  { mods = ["alt"], key = "c", action = "center_window" },
-  
-  # Layout switching
-  { mods = ["alt", "shift"], key = "t", action = "layout", payload = "tile" },
-  { mods = ["alt", "shift"], key = "m", action = "layout", payload = "monocle" },
-  { mods = ["alt", "shift"], key = "s", action = "layout", payload = "stack" },
-
-  # Workspace switching
-  { mods = ["alt"], key = "1", action = "workspace", payload = "1" },
-  { mods = ["alt"], key = "2", action = "workspace", payload = "2" },
-  { mods = ["alt"], key = "3", action = "workspace", payload = "3" },
-  { mods = ["alt"], key = "4", action = "workspace", payload = "4" },
-  { mods = ["alt"], key = "5", action = "workspace", payload = "5" },
-  { mods = ["alt"], key = "6", action = "workspace", payload = "6" },
-
-  # Move window to workspace
-  { mods = ["alt", "shift"], key = "1", action = "move_window_to_workspace", payload = "1" },
-  { mods = ["alt", "shift"], key = "2", action = "move_window_to_workspace", payload = "2" },
-  { mods = ["alt", "shift"], key = "3", action = "move_window_to_workspace", payload = "3" },
-  { mods = ["alt", "shift"], key = "4", action = "move_window_to_workspace", payload = "4" },
-  { mods = ["alt", "shift"], key = "5", action = "move_window_to_workspace", payload = "5" },
-  { mods = ["alt", "shift"], key = "6", action = "move_window_to_workspace", payload = "6" },
-
-  # Cycle through workspaces
-  { mods = ["alt"], key = "tab", action = "cycle_workspace", payload = "next" },
-  { mods = ["alt", "shift"], key = "tab", action = "cycle_workspace", payload = "prev" },
-  
-  # Quick reload configuration
-  { mods = ["alt", "shift"], key = "r", action = "reload_config" },
+# Sketchybar integration - update sketchybar when workspace changes
+exec-on-workspace-change = ['/bin/bash', '-c',
+    'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE'
 ]
 
-# Workspace configurations
-[workspaces]
-1 = { layout = "tile", name = "Main" }
-2 = { layout = "tile", name = "Dev" }
-3 = { layout = "monocle", name = "Web" }
-4 = { layout = "monocle", name = "Media" }
-5 = { layout = "tile", name = "Social" }
-6 = { layout = "stack", name = "Misc" }
+# Start AeroSpace at login (recommended, but you can also use brew services)
+start-at-login = true
 
-# Layout configurations
-[layout.tile]
-main_ratio = 0.55
-main_location = "left"
+# Normalizations. See: https://nikitabobko.github.io/AeroSpace/guide#normalization
+enable-normalization-flatten-containers = true
+enable-normalization-opposite-orientation-for-nested-containers = true
 
-[layout.monocle]
-show_single_window = true
+# Prevent window resetting when switching workspaces
+default-root-container-layout = 'tiles'
+default-root-container-orientation = 'auto'
 
-[layout.stack]
-show_single_window = true
+# Window behavior optimizations
+automatically-unhide-macos-hidden-apps = false
 
-# Application-specific rules
-[window_rules]
-"com.apple.finder" = { float = true }
-"com.apple.systempreferences" = { float = true }
-"com.apple.Calculator" = { float = true }
-"com.apple.Safari" = { workspace = "3" }
+# Accordion layout padding (helps with window persistence)
+accordion-padding = 30
+
+# CRITICAL: Only use Aerospace workspaces, not macOS Spaces
+# After switching, windows should stay in their Aerospace workspace layout
+# Use Alt+1-6 for Aerospace workspaces (NOT Ctrl+1-6 for macOS Spaces!)
+
+# Mouse follows focus when focused monitor changes
+on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+
+# Gaps
+[gaps]
+inner.horizontal = 5
+inner.vertical = 5
+outer.left = 5
+outer.bottom = 5
+outer.top = 5
+outer.right = 5
+
+# Main mode keybindings
+[mode.main.binding]
+
+# === WINDOW NAVIGATION (vim-style) ===
+alt-h = 'focus left'
+alt-j = 'focus down'
+alt-k = 'focus up'
+alt-l = 'focus right'
+
+# === WINDOW MOVEMENT ===
+alt-shift-h = 'move left'
+alt-shift-j = 'move down'
+alt-shift-k = 'move up'
+alt-shift-l = 'move right'
+
+# === WINDOW RESIZING ===
+alt-ctrl-h = 'resize width -50'
+alt-ctrl-j = 'resize height +50'
+alt-ctrl-k = 'resize height -50'
+alt-ctrl-l = 'resize width +50'
+
+# === WINDOW OPERATIONS ===
+# Aerospace fullscreen (RECOMMENDED - persists across workspace switches)
+alt-f = 'fullscreen'
+
+# macOS native fullscreen (creates separate Space - NOT recommended with Aerospace)
+# alt-shift-f = 'macos-native-fullscreen'
+
+# Other window operations
+alt-shift-space = 'layout floating tiling' # Toggle float
+alt-0 = 'balance-sizes' # Balance window sizes
+alt-r = 'flatten-workspace-tree' # Reset layout
+
+# === LAYOUT SWITCHING ===
+alt-slash = 'layout tiles horizontal vertical'
+alt-comma = 'layout tiles accordion'
+
+# === WORKSPACE SWITCHING ===
+alt-1 = 'workspace 1'
+alt-2 = 'workspace 2'
+alt-3 = 'workspace 3'
+alt-4 = 'workspace 4'
+alt-5 = 'workspace 5'
+alt-6 = 'workspace 6'
+
+# === MOVE WINDOW TO WORKSPACE ===
+alt-shift-1 = 'move-node-to-workspace 1'
+alt-shift-2 = 'move-node-to-workspace 2'
+alt-shift-3 = 'move-node-to-workspace 3'
+alt-shift-4 = 'move-node-to-workspace 4'
+alt-shift-5 = 'move-node-to-workspace 5'
+alt-shift-6 = 'move-node-to-workspace 6'
+
+# === CONFIGURATION ===
+alt-shift-r = 'reload-config'
+
+# === APP LAUNCH SHORTCUTS (from your old skhd config) ===
+# Code apps
+alt-c = 'exec-and-forget open -a "Cursor"'
+alt-d = 'exec-and-forget open -a "DataGrip"'
+
+# Web apps
+alt-z = 'exec-and-forget open -a "Zen Browser"'
+alt-b = 'exec-and-forget open -a "Arc"'
+
+# Terminal
+alt-w = 'exec-and-forget open -a "WezTerm"'
+
+# Communication
+alt-s = 'exec-and-forget open -a "Superhuman"'
+alt-a = 'exec-and-forget open -a "Asana"'
+alt-m = 'exec-and-forget open -a "Slack"'
+alt-e = 'exec-and-forget open -a "Calendar"'
+
+# Media/Design
+alt-g = 'exec-and-forget open -a "Figma"'
+
+# Productivity/Other
+alt-i = 'exec-and-forget open -a "TickTick"'
+alt-p = 'exec-and-forget open -a "ChatGPT"'
+alt-o = 'exec-and-forget open -a "Screenshot"'
+
+# === APPLICATION-SPECIFIC RULES ===
+# Only float system utilities, not regular apps
+[[on-window-detected]]
+if.app-id = 'com.apple.finder'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.systempreferences'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.Calculator'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.SystemPreferences'
+run = 'layout floating'
