@@ -119,3 +119,8 @@ alias zc='nvim ~/.zshrc'
 
 alias zz='source ~/.zshrc'
 
+
+# Create directory and cd into it
+function mkcd() {
+  mkdir -p "$@" && cd "$_";
+}
