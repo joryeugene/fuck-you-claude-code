@@ -322,3 +322,6 @@ export NVM_DIR="$HOME/.nvm"
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 ### End of Zinit's installer chunk
+
+# Monohelix development environment
+source $HOME/.local/share/monohelix/shell_config/config.zsh
