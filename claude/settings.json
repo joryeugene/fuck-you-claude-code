@@ -1,0 +1,63 @@
+{
+  "alwaysThinkingEnabled": false,
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "prettier --write {{file_path}} 2>/dev/null || true"
+          }
+        ]
+      },
+      {
+        "matcher": "Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "prettier --write {{file_path}} 2>/dev/null || true"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '{{command}}' | grep -qE 'rm -rf|DROP TABLE|DELETE FROM.*WHERE' && echo '⚠️  WARNING: Destructive command detected' || true"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "eslint --fix {{file_path}} 2>/dev/null || true"
+          }
+        ]
+      },
+      {
+        "matcher": "Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "eslint --fix {{file_path}} 2>/dev/null || true"
+          }
+        ]
+      },
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '[{{timestamp}}] {{tool_name}} {{file_path}}' >> ~/.claude/activity.log"
+          }
+        ]
+      }
+    ]
+  }
+}

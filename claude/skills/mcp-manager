@@ -1,0 +1,76 @@
+#!/usr/bin/env node
+
+/**
+ * MCP Manager Skill
+ *
+ * This skill helps manage MCP servers using the Claude CLI.
+ * It provides easy commands for adding, removing, and listing MCP servers.
+ *
+ * Usage examples:
+ * - Add a server at user level: /mcp-manager add <name> <command>
+ * - Remove a server: /mcp-manager remove <name>
+ * - List servers: /mcp-manager list
+ */
+
+const { execSync } = require('child_process');
+
+const args = process.argv.slice(2);
+const command = args[0];
+
+function runCommand(cmd) {
+  try {
+    const output = execSync(cmd, { encoding: 'utf-8', stdio: 'pipe' });
+    console.log(output);
+  } catch (error) {
+    console.error(error.stderr || error.message);
+    process.exit(1);
+  }
+}
+
+switch (command) {
+  case 'add':
+    if (args.length < 3) {
+      console.error('Usage: mcp-manager add <name> <command> [args...]');
+      process.exit(1);
+    }
+    const name = args[1];
+    const mcpCommand = args.slice(2).join(' ');
+    runCommand(`claude mcp add --scope user ${name} -- ${mcpCommand}`);
+    break;
+
+  case 'remove':
+    if (args.length < 2) {
+      console.error('Usage: mcp-manager remove <name>');
+      process.exit(1);
+    }
+    runCommand(`claude mcp remove ${args[1]}`);
+    break;
+
+  case 'list':
+    runCommand('claude mcp list');
+    break;
+
+  case 'get':
+    if (args.length < 2) {
+      console.error('Usage: mcp-manager get <name>');
+      process.exit(1);
+    }
+    runCommand(`claude mcp get ${args[1]}`);
+    break;
+
+  default:
+    console.log(`
+MCP Manager Skill
+
+Available commands:
+  add <name> <command> [args...]  Add an MCP server at user level
+  remove <name>                   Remove an MCP server
+  list                           List all MCP servers
+  get <name>                     Get details about a server
+
+Examples:
+  mcp-manager add my-server npx -y my-mcp-server
+  mcp-manager remove my-server
+  mcp-manager list
+    `);
+}
