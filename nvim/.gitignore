@@ -1,0 +1,25 @@
+# Claude settings (local only)
+**/.claude/settings.local.json
+
+# Node modules (never commit these!)
+node_modules/
+npm-debug.log*
+package-lock.json
+
+# Temporary and output files
+output/
+*.tmp
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Neovim generated files
+spell/*.spl
+
+# Lazy.nvim plugin directory
+lazy-lock.json
+
+# Mason LSP installations
+.mason/
