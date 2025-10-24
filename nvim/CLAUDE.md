@@ -20,6 +20,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
    - `<leader>b*` = Breakpoint/Debug (nvim-dap)
    - `<leader>c*` = Compile/quickfix list
    - `<leader>f*` = Find/Telescope
+   - `<leader>i*` = Integrate/Interface (code-bridge)
    - `<leader>k*` = Knowledge base (CalmHive)
    - `<leader>l*` = sqL/Database (dadbod)
    - `<leader>m*` = Marks (marks.nvim)
@@ -117,9 +118,29 @@ Features:
 - Markdown FileType only, no interference elsewhere
 
 ### AI Tools
-Two AI tools are configured:
+Three AI tools are configured:
 1. **Avante** - Cursor-like sidebar AI assistant with full agentic mode, tool use, and direct API integration (`<leader>a*`)
 2. **Copilot** - GitHub Copilot for inline code completions (insert mode)
+3. **Code-Bridge** - Bridge to Claude Code CLI with chat interface and git diff integration (`<leader>i*`)
+
+### Code-Bridge (code-bridge.nvim)
+Interactive chat interface with Claude Code CLI:
+- `<leader>iq` - Query Claude with file context (works in visual mode for selections)
+- `<leader>ic` - Chat with Claude (no file context)
+- `<leader>ih` - Hide chat window (preserves history)
+- `<leader>is` - Show chat window
+- `<leader>ix` - Wipe chat and clear history
+- `<leader>ik` - Cancel running query
+- `<leader>ip` - Resume hidden prompt editor
+- `<leader>id` - Send git diff to Claude
+- `<leader>iD` - Send staged diff to Claude
+
+Features:
+- Persistent markdown chat buffer with conversation history
+- Interactive prompt editor (Ctrl-s to send, Ctrl-x to hide, Ctrl-c to cancel)
+- Async query execution (work while Claude thinks)
+- Git integration for code review workflows
+- Complements Avante by bridging to Claude Code CLI session
 
 ## Code Style Guidelines
 - Lua: Use 2-space indentation

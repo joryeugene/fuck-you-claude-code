@@ -1,5 +1,4 @@
 {
-  "alwaysThinkingEnabled": false,
   "hooks": {
     "PreToolUse": [
       {
@@ -59,5 +58,6 @@
         ]
       }
     ]
-  }
+  },
+  "alwaysThinkingEnabled": true
 }
