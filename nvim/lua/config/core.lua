@@ -37,7 +37,7 @@ opt.fillchars = {
 opt.conceallevel = 2 -- Better concealing for markdown
 opt.concealcursor = "" -- Don't conceal on cursor line
 opt.smoothscroll = true -- Smooth scrolling (Neovim 0.10+)
-opt.shortmess:append("IWcsC") -- Less intrusive messages (C = no 'command' messages)
+opt.shortmess:append("IWcsCF") -- Less intrusive messages (C = no 'command' messages, F = no file info on edit)
 
 -- Indentation
 opt.tabstop = 2

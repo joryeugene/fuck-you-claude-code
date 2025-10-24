@@ -30,7 +30,6 @@ return {
           "yamlls",
           "bashls",
           "pyright", -- Python LSP
-          "js-debug-adapter", -- JS/TS debugger
         },
         automatic_installation = true,
       })
