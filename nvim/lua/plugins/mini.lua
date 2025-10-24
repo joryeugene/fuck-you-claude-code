@@ -151,7 +151,7 @@ return {
           { mode = 'n', keys = '<Leader>g', desc = '+Git' },
           { mode = 'n', keys = '<Leader>k', desc = '+Knowledge (CalmHive)' },
           { mode = 'n', keys = '<Leader>l', desc = '+sqL (Database)' },
-          { mode = 'n', keys = '<Leader>m', desc = '+Model (Claude Code)' },
+          { mode = 'n', keys = '<Leader>m', desc = '+Marks (marks.nvim)' },
           { mode = 'n', keys = '<Leader>n', desc = '+Notes/Markdown' },
           { mode = 'n', keys = '<Leader>p', desc = '+Postman (REST/HTTP)' },
           { mode = 'n', keys = '<Leader>r', desc = '+Refactoring' },
@@ -159,6 +159,7 @@ return {
           { mode = 'n', keys = '<Leader>t', desc = '+Tabs/Terminal' },
           { mode = 'n', keys = '<Leader>u', desc = '+UI Toggles' },
           { mode = 'n', keys = '<Leader>v', desc = '+Vault/Config' },
+          { mode = 'n', keys = '<Leader>x', desc = '+Diagnostics (Trouble)' },
           { mode = 'n', keys = '<Leader>z', desc = '+Zen Mode & Preview' },
 
           -- Visual mode namespaces
