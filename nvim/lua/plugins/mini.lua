@@ -124,6 +124,28 @@ return {
           require('mini.clue').gen_clues.registers(),
           require('mini.clue').gen_clues.windows(),
           require('mini.clue').gen_clues.z(),
+
+          -- Custom leader namespace descriptions
+          { mode = 'n', keys = '<Leader>a', desc = '+AI (Avante)' },
+          { mode = 'n', keys = '<Leader>b', desc = '+Buffers' },
+          { mode = 'n', keys = '<Leader>c', desc = '+Compile/Quickfix' },
+          { mode = 'n', keys = '<Leader>f', desc = '+Find (Telescope)' },
+          { mode = 'n', keys = '<Leader>g', desc = '+Git' },
+          { mode = 'n', keys = '<Leader>k', desc = '+Knowledge (CalmHive)' },
+          { mode = 'n', keys = '<Leader>l', desc = '+sqL (Database)' },
+          { mode = 'n', keys = '<Leader>m', desc = '+Model (Claude Code)' },
+          { mode = 'n', keys = '<Leader>p', desc = '+Postman (REST/HTTP)' },
+          { mode = 'n', keys = '<Leader>r', desc = '+Refactoring' },
+          { mode = 'n', keys = '<Leader>s', desc = '+Splits/Windows' },
+          { mode = 'n', keys = '<Leader>t', desc = '+Tabs/Terminal' },
+          { mode = 'n', keys = '<Leader>u', desc = '+UI Toggles' },
+          { mode = 'n', keys = '<Leader>v', desc = '+Vault/Config' },
+          { mode = 'n', keys = '<Leader>z', desc = '+Zen Mode & Preview' },
+
+          -- Visual mode namespaces
+          { mode = 'x', keys = '<Leader>a', desc = '+AI (Avante)' },
+          { mode = 'x', keys = '<Leader>f', desc = '+Find' },
+          { mode = 'x', keys = '<Leader>r', desc = '+Refactoring' },
         },
 
         window = {
