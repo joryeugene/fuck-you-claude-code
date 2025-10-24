@@ -17,6 +17,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 2. **No single-letter conflicts** - If `<leader>x` exists as single mapping, cannot use `<leader>x*` as namespace
 3. **Current namespace allocation:**
    - `<leader>a*` = Avante AI assistant
+   - `<leader>b*` = Breakpoint/Debug (nvim-dap)
    - `<leader>c*` = Compile/quickfix list
    - `<leader>f*` = Find/Telescope
    - `<leader>k*` = Knowledge base (CalmHive)
