@@ -1,14 +1,13 @@
 -- drop.nvim - Screensaver with falling characters
--- Matrix rain, snow, spring, and summer themes
 
 return {
   "folke/drop.nvim",
   event = "VeryLazy",
   opts = {
-    theme = "auto", -- "auto" cycles through themes, or pick: "snow", "stars", "xmas", "spring", "summer"
-    max = 40, -- maximum number of drops on the screen
-    interval = 150, -- milliseconds between drops
-    screensaver = 1000 * 60 * 5, -- show after 5 minutes of inactivity (5000ms = 5 min)
+    theme = "matrix",
+    max = 250, -- maximum number of drops on the screen
+    interval = 100, -- milliseconds between drops
+    screensaver = 60 * 5 * 1000,
     filetypes = {}, -- list of filetypes to enable drops (empty = all)
   },
   config = function(_, opts)
