@@ -20,6 +20,7 @@ opt.scrolloff = 8
 opt.sidescrolloff = 8
 opt.termguicolors = true
 opt.showmode = false
+opt.cmdheight = 0 -- Hide command line when not in use (shows in floating window)
 
 -- Modern UI enhancements
 opt.pumblend = 10 -- Popup menu transparency
@@ -36,7 +37,7 @@ opt.fillchars = {
 opt.conceallevel = 2 -- Better concealing for markdown
 opt.concealcursor = "" -- Don't conceal on cursor line
 opt.smoothscroll = true -- Smooth scrolling (Neovim 0.10+)
-opt.shortmess:append("IWcs") -- Less intrusive messages
+opt.shortmess:append("IWcsC") -- Less intrusive messages (C = no 'command' messages)
 
 -- Indentation
 opt.tabstop = 2

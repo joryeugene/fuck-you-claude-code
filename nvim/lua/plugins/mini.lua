@@ -6,10 +6,28 @@ return {
     "echasnovski/mini.nvim",
     version = false,
     config = function()
-      -- Statusline
-      require('mini.statusline').setup({
+      -- Statusline (minimal)
+      local statusline = require('mini.statusline')
+      statusline.setup({
         use_icons = true,
-        set_vim_settings = false,
+        set_vim_settings = true,
+        content = {
+          active = function()
+            local mode, mode_hl = statusline.section_mode({ trunc_width = 120 })
+            local filename = statusline.section_filename({ trunc_width = 140 })
+            local fileinfo = statusline.section_fileinfo({ trunc_width = 120 })
+            local location = statusline.section_location({ trunc_width = 75 })
+
+            return statusline.combine_groups({
+              { hl = mode_hl, strings = { mode } },
+              { hl = 'MiniStatuslineFilename', strings = { filename } },
+              '%<', -- Mark truncation point
+              { hl = 'MiniStatuslineFileinfo', strings = { fileinfo } },
+              '%=', -- End left, begin right
+              { hl = 'MiniStatuslineFileinfo', strings = { location } },
+            })
+          end,
+        },
       })
 
       -- Dashboard / Starter screen
@@ -134,6 +152,7 @@ return {
           { mode = 'n', keys = '<Leader>k', desc = '+Knowledge (CalmHive)' },
           { mode = 'n', keys = '<Leader>l', desc = '+sqL (Database)' },
           { mode = 'n', keys = '<Leader>m', desc = '+Model (Claude Code)' },
+          { mode = 'n', keys = '<Leader>n', desc = '+Notes/Markdown' },
           { mode = 'n', keys = '<Leader>p', desc = '+Postman (REST/HTTP)' },
           { mode = 'n', keys = '<Leader>r', desc = '+Refactoring' },
           { mode = 'n', keys = '<Leader>s', desc = '+Splits/Windows' },
@@ -145,6 +164,7 @@ return {
           -- Visual mode namespaces
           { mode = 'x', keys = '<Leader>a', desc = '+AI (Avante)' },
           { mode = 'x', keys = '<Leader>f', desc = '+Find' },
+          { mode = 'x', keys = '<Leader>n', desc = '+Notes/Markdown' },
           { mode = 'x', keys = '<Leader>r', desc = '+Refactoring' },
         },
 
