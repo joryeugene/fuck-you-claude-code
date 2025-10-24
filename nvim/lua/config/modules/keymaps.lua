@@ -339,8 +339,9 @@ function M.setup_plugin_keymaps()
     local script = "/Users/jory/Documents/calmhive/resources/scripts/create-daily-note.sh"
     local output = vim.fn.system(script)
     local lines = vim.split(vim.trim(output), "\n")
-    local path = lines[1]
-    if vim.fn.filereadable(path) == 1 then
+    -- Script outputs informational messages first, file path last
+    local path = lines[#lines]
+    if path and vim.fn.filereadable(path) == 1 then
       vim.cmd("edit " .. vim.fn.fnameescape(path))
     else
       vim.notify("Failed to create daily note: " .. output, vim.log.levels.ERROR)
