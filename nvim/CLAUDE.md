@@ -27,6 +27,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
    - `<leader>r*` = Refactoring (refactoring.nvim)
    - `<leader>s*` = Splits/windows
    - `<leader>t*` = Tabs/terminal
+   - `<leader>x*` = Diagnostics/Quickfix (Trouble)
    - `<leader>z*` = Zen mode & markdown preview
 4. **Single-letter only (NO namespace):**
    - `<leader>d` = Duplicate
