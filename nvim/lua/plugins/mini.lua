@@ -145,7 +145,7 @@ return {
 
           -- Custom leader namespace descriptions
           { mode = 'n', keys = '<Leader>a', desc = '+AI (Avante)' },
-          { mode = 'n', keys = '<Leader>b', desc = '+Buffers' },
+          { mode = 'n', keys = '<Leader>b', desc = '+Debug/Breakpoints (DAP)' },
           { mode = 'n', keys = '<Leader>c', desc = '+Compile/Quickfix' },
           { mode = 'n', keys = '<Leader>f', desc = '+Find (Telescope)' },
           { mode = 'n', keys = '<Leader>g', desc = '+Git' },
@@ -164,6 +164,7 @@ return {
 
           -- Visual mode namespaces
           { mode = 'x', keys = '<Leader>a', desc = '+AI (Avante)' },
+          { mode = 'x', keys = '<Leader>b', desc = '+Debug' },
           { mode = 'x', keys = '<Leader>f', desc = '+Find' },
           { mode = 'x', keys = '<Leader>n', desc = '+Notes/Markdown' },
           { mode = 'x', keys = '<Leader>r', desc = '+Refactoring' },
