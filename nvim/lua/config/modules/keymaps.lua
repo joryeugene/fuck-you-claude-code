@@ -103,6 +103,9 @@ function M.setup_general_keymaps()
   set_keymap("n", "<leader>Q", ":qa<CR>", "Quit all")
   set_keymap("n", "<leader>q", smart_buffer_close, "Close current buffer")
 
+  -- Disable Ex mode (Q) to allow QQ to work
+  set_keymap("n", "Q", "<Nop>", "Disabled (was Ex mode)")
+
   -- Quick double-tap commands
   set_keymap("n", "WW", ":wa<CR>", "Quick: Save all")
   set_keymap("n", "QQ", ":qa<CR>", "Quick: Quit all")
@@ -165,10 +168,6 @@ function M.setup_navigation_keymaps()
     vim.cmd("wincmd |")
     vim.cmd("wincmd _")
   end, "Maximize/zoom current window")
-
-  -- Jump list
-  set_keymap("n", "<leader>zo", "<C-o>", "Jump back")
-  set_keymap("n", "<leader>zi", "<C-i>", "Jump forward")
 
   -- Buffer management
   set_keymap("n", "<C-[>", ":bprevious<CR>", "Previous buffer")
