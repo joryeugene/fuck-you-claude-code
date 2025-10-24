@@ -342,19 +342,6 @@ nvim
 :Mason
 ```
 
-### 7. Claude Code Setup
-
-```bash
-# Install Claude Code (if not already installed)
-# Follow: https://github.com/anthropics/claude-code
-
-# Set API key
-export ANTHROPIC_API_KEY="your-api-key-here"
-
-# Verify symlinks worked
-claude config list
-```
-
 ### Post-Installation
 
 **Verify everything:**
