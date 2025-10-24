@@ -29,6 +29,7 @@ return {
           "jsonls",
           "yamlls",
           "bashls",
+          "pyright", -- Python LSP
         },
         automatic_installation = true,
       })
