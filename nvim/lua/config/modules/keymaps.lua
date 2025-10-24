@@ -506,17 +506,6 @@ function M.setup_plugin_keymaps()
   set_keymap("n", "<leader>gd", ":Gitsigns diffthis<CR>", "Git diff current file")
   set_keymap("n", "<leader>gD", ":Gitsigns diffthis ~<CR>", "Git diff staged changes")
 
-  -- Fugitive (if available)
-  local fugitive_ok = pcall(function()
-    vim.cmd("command Git")
-  end)
-  if fugitive_ok then
-    set_keymap("n", "<leader>gf", ":Git<CR>", "Git fugitive status")
-    set_keymap("n", "<leader>gc", ":Git commit<CR>", "Git commit")
-    set_keymap("n", "<leader>gP", ":Git push<CR>", "Git push")
-    set_keymap("n", "<leader>gl", ":Git pull<CR>", "Git pull")
-  end
-
   -- Which-key (if available)
   local which_key_ok = pcall(require, "which-key")
   if which_key_ok then
@@ -598,6 +587,31 @@ function M.setup_obsidian_links()
   })
 end
 
+-- Setup markdown editing keymaps (bold/italic with mini.surround)
+function M.setup_markdown_keymaps()
+  vim.api.nvim_create_autocmd("FileType", {
+    pattern = "markdown",
+    callback = function()
+      local ok, mini_surround = pcall(require, "mini.surround")
+      if not ok then
+        return
+      end
+
+      -- Bold: surround with ** in visual mode, or word under cursor in normal mode
+      set_keymap("v", "<leader>nb", "sa*", { remap = true, desc = "Bold text (surround with **)" })
+      set_keymap("n", "<leader>nb", "viwsa*", { remap = true, desc = "Bold word under cursor" })
+
+      -- Italic: surround with _ in visual mode, or word under cursor in normal mode
+      set_keymap("v", "<leader>ni", "sa_", { remap = true, desc = "Italic text (surround with _)" })
+      set_keymap("n", "<leader>ni", "viwsa_", { remap = true, desc = "Italic word under cursor" })
+
+      -- Code inline: surround with `
+      set_keymap("v", "<leader>nk", "sa`", { remap = true, desc = "Inline code (surround with `)" })
+      set_keymap("n", "<leader>nk", "viwsa`", { remap = true, desc = "Inline code word under cursor" })
+    end,
+  })
+end
+
 -- Main setup function (Lines 655-664)
 function M.setup()
   M.setup_general_keymaps()
@@ -608,6 +622,7 @@ function M.setup()
   M.setup_debug_keymaps()
   M.setup_plugin_keymaps()
   M.setup_obsidian_links()
+  M.setup_markdown_keymaps()
 end
 
 return M
