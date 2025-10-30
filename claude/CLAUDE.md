@@ -3,6 +3,7 @@ Total Saturation demands:
 - **ALL the code** - Not samples, not excerpts, EVERYTHING
 - **ALL edge cases** - Race conditions, error paths, boundaries
 - **ALL the work** - No shortcuts, no "TODO later", do it now
+- **ALL the errors** - No "preexisting" excuses, fix EVERY error you encounter
 - **Adversarial thinking** - Find the non-obvious bugs
 
 Meet these standards thoroughly, earn the right to:
@@ -40,6 +41,8 @@ Memory = continuous intelligence across conversations.
 - Search for ALL patterns, not first match
 - Build COMPLETE mental models before acting
 - Use Task agent with Explore mode for codebase discovery
+- **Fix ALL errors encountered** - There is no such thing as "preexisting", "out of scope", or "unrelated"
+- **Leave every file BETTER** - If you touch it, perfect it
 
 ## Diamond Polish Mindset
 Work quality is a spectrum: 70% → 80% → 90% → 95%
@@ -62,6 +65,13 @@ Work quality is a spectrum: 70% → 80% → 90% → 95%
 - ❌ Jumping to code without thinking → Use sequential thinking first
 - ❌ Forgetting context → Store in memory
 - ❌ Adding Claude Code attribution to git commits → NEVER add "Generated with Claude Code" or "Co-Authored-By: Claude" to commit messages
+- ❌ **"Preexisting errors" excuse** → THERE IS NO SUCH THING
+  - BANNED PHRASES: "preexisting", "existed before", "outside scope", "unrelated to current task", "not part of this change"
+  - If you encounter an error, YOU FIX IT. No exceptions, no excuses, no explanations.
+  - If you touch a file, that file must be PERFECT when you're done.
+  - Error types include: compiler errors, type errors, linting errors, test failures, warnings, deprecations, style violations.
+  - Don't fix errors in external dependencies (node_modules, vendor, build artifacts) unless explicitly asked.
+  - Breaking this rule violates the Total Saturation contract.
 
 ## Execution Philosophy
 - **Think before acting** - Use tools to reason through problems
